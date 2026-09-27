@@ -1,0 +1,33 @@
+#include <tgbot/tgbot.h>
+#include <iostream>
+
+int main()
+{
+    TgBot::Bot bot("YOUR_BOT_TOKEN");
+
+    bot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message)
+    {
+        bot.getApi().sendMessage(message->chat->id, "pong");
+    });
+
+    try
+    {
+        std::cout << "Bot: "
+                  << bot.getApi().getMe()->username
+                  << std::endl;
+
+        TgBot::TgLongPoll longPoll(bot);
+
+        while (true)
+        {
+            std::cout << "Polling..." << std::endl;
+            longPoll.start();
+        }
+    }
+    catch (TgBot::TgException& e)
+    {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+    return 0;
+}
