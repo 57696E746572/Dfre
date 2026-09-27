@@ -3,7 +3,7 @@
 
 int main()
 {
-    TgBot::Bot bot("YOUR_BOT_TOKEN");
+    TgBot::Bot bot("8992624178:AAFeaJ38KNO28pxPm3aGqBkUjyhmHvnfWOQ");
 
     bot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message)
     {
