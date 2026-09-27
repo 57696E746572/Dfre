@@ -1,0 +1,21 @@
+CXX = g++
+
+TARGET = bot
+SRC = main.cpp
+
+TGBOT_DIR = ../tgbot-cpp
+
+CXXFLAGS = -std=c++20 -Wall -Wextra \
+           -I$(TGBOT_DIR)/include
+
+LDFLAGS = -L$(TGBOT_DIR)/build
+LDLIBS = -lTgBot -lcurl -lboost_system -lssl -lcrypto -lpthread
+
+$(TARGET): $(SRC)
+	$(CXX) $(CXXFLAGS) $(SRC) $(LDFLAGS) $(LDLIBS) -o $(TARGET)
+
+clean:
+	rm -f $(TARGET)
+
+run: $(TARGET)
+	./$(TARGET)
